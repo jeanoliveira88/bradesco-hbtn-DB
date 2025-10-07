@@ -1,1 +1,0 @@
-Criar uma aplicação CRUD para Gestão de Cursos usando Hibernate + JPA + SQLite
