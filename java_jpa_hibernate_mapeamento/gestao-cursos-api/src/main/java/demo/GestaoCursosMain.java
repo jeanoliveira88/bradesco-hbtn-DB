@@ -1,37 +1,36 @@
 package demo;
 
-import entities.Aluno;
-import entities.Telefone;
-import models.AlunoModel;
+import entities.*;
+import models.*;
 
-import java.util.ArrayList;
 import java.util.Date;
 
 public class GestaoCursosMain {
     public static void main(String[] args) {
+        TelefoneModel telefoneModel = new TelefoneModel();
+        Telefone telefone = Telefone.builder().numero("99999-9999").ddd("11").build();
+        telefoneModel.create(telefone);
+
+        EnderecoModel enderecoModel = new EnderecoModel();
+        Endereco endereco = Endereco.builder().logradouro("Rua A").numero("123").bairro("Centro").cidade("São Paulo").estado("SP").cep(12345678).build();
+        enderecoModel.create(endereco);
+
+        ProfessorModel professorModel = new ProfessorModel();
+        Professor professor = Professor.builder().nomeCompleto("Maria Oliveira").matricula("123").email("maria.oliveira@email.com").build();
+        professorModel.create(professor);
+
+        MaterialCursoModel materialCursoModel = new MaterialCursoModel();
+        MaterialCurso materialCurso = MaterialCurso.builder().url("http://materialcurso.com/java").build();
+        materialCursoModel.create(materialCurso);
+
+        CursoModel cursoModel = new CursoModel();
+        Curso curso = Curso.builder().nome("Java para Iniciantes").sigla("SLP").professor(professor).materialCurso(materialCurso).build();
+        cursoModel.create(curso);
+
         AlunoModel alunoModel = new AlunoModel();
-
-        // Inserção de um aluno
-        Aluno aluno = new Aluno(1l,
-                "João da Silva",
-                "20231234",
-                new Date(), // data atual como exemplo
-                "joao.silva@email.com",
-                new ArrayList<Telefone>(),
-                new ArrayList<>(),
-                new ArrayList<>()
-        );
-
+        Aluno aluno = Aluno.builder().nomeCompleto("João da Silva").matricula("20231234").nascimento(new Date()).email("joao.silva@email.com").telefone(telefone).endereco(endereco).curso(curso).build();
         alunoModel.create(aluno);
 
-//            // Inserção de um curso
-//            CursoModel curso = new CursoModel("Java Básico");
-//            int cursoId = CursoDAO.inserir(conn, curso);
-//
-//            // Associação do aluno ao curso
-//            CursoDAO.adicionarAluno(conn, cursoId, alunoId);
-
-//        System.out.println("Banco populado com sucesso!");
 
     }
 }

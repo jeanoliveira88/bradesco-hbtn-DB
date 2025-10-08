@@ -1,11 +1,19 @@
 package entities;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
+import javax.persistence.*;
+
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @Getter
 @Setter
+@Entity
+@Table
 public class Endereco {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String logradouro;
     private String endereco;

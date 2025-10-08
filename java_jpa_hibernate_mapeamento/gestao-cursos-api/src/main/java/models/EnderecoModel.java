@@ -1,42 +1,25 @@
 package models;
 
-import entities.Curso;
+import entities.Endereco;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
-import java.util.List;
 
-public class CursoModel {
+public class EnderecoModel {
     EntityManagerFactory emf = Persistence.createEntityManagerFactory("gestao-cursos-jpa");
     EntityManager em = emf.createEntityManager();
 
-    public void create(Curso curso) {
+    public void create(Endereco endereco) {
         try {
             System.out.println("Iniciando a transação");
             em.getTransaction().begin();
-            em.persist(curso);
+            em.persist(endereco);
             em.getTransaction().commit();
             System.out.println("curso criado com sucesso !!!");
         } catch (Exception e) {
             em.close();
             System.err.println("Erro ao criar um curso !!!" + e.getMessage());
         }
-    }
-
-    public Curso findById(Long id) {
-        return em.find(Curso.class, id);
-    }
-
-    public List<Curso> findAll() {
-        return em.createQuery("SELECT a FROM Curso a", Curso.class).getResultList();
-    }
-
-    public void update(Curso curso) {
-        em.merge(curso);
-    }
-
-    public void delete(Curso curso) {
-        em.remove(curso);
     }
 }

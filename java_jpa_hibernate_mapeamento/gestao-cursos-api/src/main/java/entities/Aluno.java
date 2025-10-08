@@ -1,10 +1,8 @@
 package entities;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
+import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
 
@@ -12,14 +10,26 @@ import java.util.List;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
+@Entity
+@Table
 public class Aluno {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private String nomeCompleto;
     private String matricula;
     private Date nascimento;
     private String email;
-    private List<Telefone> telefones;
-    private List<Endereco> enderecos;
-    private List<Curso> cursos;
+    @ManyToOne
+    @JoinColumn(name = "telefone_id")
+    private Telefone telefone;
+    @ManyToOne
+    @JoinColumn(name = "endereco_id")
+    private Endereco endereco;
+    @ManyToOne
+    @JoinColumn(name = "curso_id")
+    private Curso curso;
 }
 
